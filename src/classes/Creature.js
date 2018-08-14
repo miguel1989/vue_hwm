@@ -1,6 +1,4 @@
-import {SELF_CREATURE_NUM, AVAILABLE_MOVE_NUM, EMPTY_NUM} from '../constants'
-
-const DIAGONALLY_POINTS = 2
+import AvailableMoves from './AvailableMoves'
 const DEBUG = false
 
 export default class Creature {
@@ -27,58 +25,14 @@ export default class Creature {
 
   calculateAvailableMoves() {
     if (DEBUG) console.time('calculateAvailableMoves')
-    let speedPoints = this.speed
-    let clonedCells = this.board.toNumArr()
-    clonedCells[this.y][this.x] = SELF_CREATURE_NUM
-    this._recurCalcAvailMoves(clonedCells, this.x, this.y, speedPoints)
+    let resultCellNumArr = new AvailableMoves(
+      this.board.toNumArr(),
+      this.x,
+      this.y,
+      this.speed
+    ).calculate()
     if (DEBUG) console.timeEnd('calculateAvailableMoves')
-    if (DEBUG) console.log('END')
-    if (DEBUG) console.log(clonedCells)
-    return clonedCells
-  }
-
-  _recurCalcAvailMoves(cells, x, y, speedPoints) {
-    if (speedPoints < 0) {
-      return
-    }
-    if (cells[y][x] === EMPTY_NUM) {
-      cells[y][x] = AVAILABLE_MOVE_NUM
-    }
-    // if (DEBUG) console.log(cells)
-    // if (DEBUG) console.log(`x = ${x}, y = ${y}, speedPoints = ${speedPoints}`)
-    let canMoveLeft = (x - 1 >= 0) && this._isCellAvailable(cells, x - 1, y)
-    let canMoveUp = (y - 1 >= 0) && this._isCellAvailable(cells, x, y - 1)
-    let canMoveRight = (x + 1 < cells[0].length) && this._isCellAvailable(cells, x + 1, y)
-    let canMoveDown = (y + 1 < cells.length) && this._isCellAvailable(cells, x, y + 1)
-    // firstly move horizontally or vertically
-    if (canMoveLeft) {
-      this._recurCalcAvailMoves(cells, x - 1, y, speedPoints - 1)
-    }
-    if (canMoveUp) {
-      this._recurCalcAvailMoves(cells, x, y - 1, speedPoints - 1)
-    }
-    if (canMoveRight) {
-      this._recurCalcAvailMoves(cells, x + 1, y, speedPoints - 1)
-    }
-    if (canMoveDown) {
-      this._recurCalcAvailMoves(cells, x, y + 1, speedPoints - 1)
-    }
-    // now move diagonally
-    if (canMoveUp && canMoveLeft) {
-      this._recurCalcAvailMoves(cells, x - 1, y - 1, speedPoints - DIAGONALLY_POINTS)
-    }
-    if (canMoveUp && canMoveRight) {
-      this._recurCalcAvailMoves(cells, x + 1, y - 1, speedPoints - DIAGONALLY_POINTS)
-    }
-    if (canMoveDown && canMoveRight) {
-      this._recurCalcAvailMoves(cells, x + 1, y + 1, speedPoints - DIAGONALLY_POINTS)
-    }
-    if (canMoveDown && canMoveLeft) {
-      this._recurCalcAvailMoves(cells, x - 1, y + 1, speedPoints - DIAGONALLY_POINTS)
-    }
-  }
-
-  _isCellAvailable(cells, x, y) {
-    return cells[y][x] === EMPTY_NUM || cells[y][x] === AVAILABLE_MOVE_NUM
+    if (DEBUG) console.log(resultCellNumArr)
+    return resultCellNumArr
   }
 }
