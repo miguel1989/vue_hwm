@@ -1,7 +1,7 @@
 import {SELF_CREATURE_NUM, AVAILABLE_MOVE_NUM, EMPTY_NUM} from '../constants'
 
 const DIAGONALLY_POINTS = 2
-const DEBUG = true
+const DEBUG = false
 
 export default class Creature {
   constructor(board, x, y, speed = 4) {
@@ -18,6 +18,7 @@ export default class Creature {
   }
 
   move(toX, toY) {
+    // todo add validation can he go there?
     this.board.cell(this.x, this.y).removeCreature(this.uuid)
     this.x = toX
     this.y = toY
