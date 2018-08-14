@@ -20,7 +20,7 @@ export default class Creature {
     if (DEBUG) console.time('calculateAvailableMoves')
     let speedPoints = this.speed
     let clonedCells = this.board.cells.slice(0)
-    clonedCells[this.x][this.y] = 1 // todo think about what to place here
+    clonedCells[this.y][this.x] = 1 // todo think about what to place here
     this._recurCalcAvailMoves(clonedCells, this.x, this.y, speedPoints)
     if (DEBUG) console.timeEnd('calculateAvailableMoves')
     if (DEBUG) console.log('END')

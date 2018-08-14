@@ -15,20 +15,4 @@ describe('Creature', () => {
     expect(creature.x).toEqual(1)
     expect(creature.y).toEqual(2)
   })
-
-  it('should calculate available moves on empty board for speed = 3, board 7x7', () => {
-    board = new Board(7, 7)
-    let creature = new Creature(board, 3, 3, 3)
-    expect(creature.calculateAvailableMoves()).toEqual(
-      [
-        [ 0, 0, 0, 2, 0, 0, 0 ],
-        [ 0, 0, 2, 2, 2, 0, 0 ],
-        [ 0, 2, 2, 2, 2, 2, 0 ],
-        [ 2, 2, 2, 1, 2, 2, 2 ],
-        [ 0, 2, 2, 2, 2, 2, 0 ],
-        [ 0, 0, 2, 2, 2, 0, 0 ],
-        [ 0, 0, 0, 2, 0, 0, 0 ]
-      ]
-    )
-  })
 })
