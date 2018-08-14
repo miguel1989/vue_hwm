@@ -1,7 +1,7 @@
 import {SELF_CREATURE_NUM, AVAILABLE_MOVE_NUM, EMPTY_NUM} from '../constants'
 
-const DIAGONALLY_POINTS = 1.6
-const DEBUG = false
+const DIAGONALLY_POINTS = 2
+const DEBUG = true
 
 export default class Creature {
   constructor(board, x, y, speed = 4) {
@@ -43,12 +43,12 @@ export default class Creature {
     if (cells[y][x] === EMPTY_NUM) {
       cells[y][x] = AVAILABLE_MOVE_NUM
     }
-    if (DEBUG) console.log(cells)
-    if (DEBUG) console.log(`x = ${x}, y = ${y}, speedPoints = ${speedPoints}`)
-    let canMoveLeft = x - 1 >= 0
-    let canMoveUp = y - 1 >= 0
-    let canMoveRight = x + 1 < cells[0].length
-    let canMoveDown = y + 1 < cells.length
+    // if (DEBUG) console.log(cells)
+    // if (DEBUG) console.log(`x = ${x}, y = ${y}, speedPoints = ${speedPoints}`)
+    let canMoveLeft = (x - 1 >= 0) && this._isCellAvailable(cells, x - 1, y)
+    let canMoveUp = (y - 1 >= 0) && this._isCellAvailable(cells, x, y - 1)
+    let canMoveRight = (x + 1 < cells[0].length) && this._isCellAvailable(cells, x + 1, y)
+    let canMoveDown = (y + 1 < cells.length) && this._isCellAvailable(cells, x, y + 1)
     // firstly move horizontally or vertically
     if (canMoveLeft) {
       this._recurCalcAvailMoves(cells, x - 1, y, speedPoints - 1)
@@ -75,5 +75,9 @@ export default class Creature {
     if (canMoveDown && canMoveLeft) {
       this._recurCalcAvailMoves(cells, x - 1, y + 1, speedPoints - DIAGONALLY_POINTS)
     }
+  }
+
+  _isCellAvailable(cells, x, y) {
+    return cells[y][x] === EMPTY_NUM || cells[y][x] === AVAILABLE_MOVE_NUM
   }
 }
