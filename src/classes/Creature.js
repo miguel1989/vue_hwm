@@ -1,4 +1,6 @@
 import AvailableMoves from './AvailableMoves'
+import {AVAILABLE_MOVE_NUM} from '../constants'
+
 const DEBUG = false
 
 export default class Creature {
@@ -16,11 +18,16 @@ export default class Creature {
   }
 
   move(toX, toY) {
-    // todo add validation can he go there?
+    let availableMoveArr = this.calculateAvailableMoves()
+    if (availableMoveArr[toY][toX] !== AVAILABLE_MOVE_NUM) {
+      return false
+    }
+    // todo somewhere calc the path from A to B
     this.board.cell(this.x, this.y).removeCreature(this.uuid)
     this.x = toX
     this.y = toY
     this.board.cell(this.x, this.y).addCreature(this)
+    return true
   }
 
   calculateAvailableMoves() {

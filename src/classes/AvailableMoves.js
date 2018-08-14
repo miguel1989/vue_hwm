@@ -1,5 +1,6 @@
 import {AVAILABLE_MOVE_NUM, EMPTY_NUM, SELF_CREATURE_NUM} from '../constants'
-const DIAGONALLY_POINTS = 2
+const SPEED_POINTS_DIAGONAL = 2
+const SPEED_POINTS_NORMAL = 1
 // const DEBUG = false
 
 export default class AvailableMoves {
@@ -31,29 +32,29 @@ export default class AvailableMoves {
     let canMoveDown = (y + 1 < this.cellNumArr.length) && this._isCellAvailable(x, y + 1)
     // firstly move horizontally or vertically
     if (canMoveLeft) {
-      this._recurCalc(x - 1, y, speedPoints - 1)
+      this._recurCalc(x - 1, y, speedPoints - SPEED_POINTS_NORMAL)
     }
     if (canMoveUp) {
-      this._recurCalc(x, y - 1, speedPoints - 1)
+      this._recurCalc(x, y - 1, speedPoints - SPEED_POINTS_NORMAL)
     }
     if (canMoveRight) {
-      this._recurCalc(x + 1, y, speedPoints - 1)
+      this._recurCalc(x + 1, y, speedPoints - SPEED_POINTS_NORMAL)
     }
     if (canMoveDown) {
-      this._recurCalc(x, y + 1, speedPoints - 1)
+      this._recurCalc(x, y + 1, speedPoints - SPEED_POINTS_NORMAL)
     }
     // now move diagonally
     if (canMoveUp && canMoveLeft) {
-      this._recurCalc(x - 1, y - 1, speedPoints - DIAGONALLY_POINTS)
+      this._recurCalc(x - 1, y - 1, speedPoints - SPEED_POINTS_DIAGONAL)
     }
     if (canMoveUp && canMoveRight) {
-      this._recurCalc(x + 1, y - 1, speedPoints - DIAGONALLY_POINTS)
+      this._recurCalc(x + 1, y - 1, speedPoints - SPEED_POINTS_DIAGONAL)
     }
     if (canMoveDown && canMoveRight) {
-      this._recurCalc(x + 1, y + 1, speedPoints - DIAGONALLY_POINTS)
+      this._recurCalc(x + 1, y + 1, speedPoints - SPEED_POINTS_DIAGONAL)
     }
     if (canMoveDown && canMoveLeft) {
-      this._recurCalc(x - 1, y + 1, speedPoints - DIAGONALLY_POINTS)
+      this._recurCalc(x - 1, y + 1, speedPoints - SPEED_POINTS_DIAGONAL)
     }
   }
 
