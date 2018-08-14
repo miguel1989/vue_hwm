@@ -1,26 +1,34 @@
+import {SELF_CREATURE_NUM, AVAILABLE_MOVE_NUM, EMPTY_NUM} from '../constants'
+
 const DIAGONALLY_POINTS = 1.6
 const DEBUG = false
+
 export default class Creature {
-  constructor(board, x, y, speed = 4, initiative = 10.0) {
+  constructor(board, x, y, speed = 4) {
+    this.uuid = Math.random().toString(16).slice(2)
     this.board = board
     this.x = x
     this.y = y
     this.speed = speed
-    this.initiative = initiative
-    // to isLarge
-    // to isFlying
+    // this.initiative = initiative 10.0
+    this.isAlive = true
+
+    this.board.cell(this.x, this.y).addCreature(this)
+    // todo isLarge, isFlying as skills
   }
 
   move(toX, toY) {
+    this.board.cell(this.x, this.y).removeCreature(this.uuid)
     this.x = toX
     this.y = toY
+    this.board.cell(this.x, this.y).addCreature(this)
   }
 
   calculateAvailableMoves() {
     if (DEBUG) console.time('calculateAvailableMoves')
     let speedPoints = this.speed
-    let clonedCells = this.board.cells.slice(0)
-    clonedCells[this.y][this.x] = 1 // todo think about what to place here
+    let clonedCells = this.board.toNumArr()
+    clonedCells[this.y][this.x] = SELF_CREATURE_NUM
     this._recurCalcAvailMoves(clonedCells, this.x, this.y, speedPoints)
     if (DEBUG) console.timeEnd('calculateAvailableMoves')
     if (DEBUG) console.log('END')
@@ -32,8 +40,8 @@ export default class Creature {
     if (speedPoints < 0) {
       return
     }
-    if (cells[y][x] === 0) {
-      cells[y][x] = 2 // todo think about what to place here
+    if (cells[y][x] === EMPTY_NUM) {
+      cells[y][x] = AVAILABLE_MOVE_NUM
     }
     if (DEBUG) console.log(cells)
     if (DEBUG) console.log(`x = ${x}, y = ${y}, speedPoints = ${speedPoints}`)

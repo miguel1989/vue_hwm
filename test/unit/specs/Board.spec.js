@@ -2,10 +2,10 @@ import Board from '@/classes/Board'
 // https://jestjs.io/docs/en/getting-started.html
 
 describe('Board', () => {
-  it('create cells', () => {
+  it('should convert cells to num', () => {
     let board = new Board(2, 4)
     // console.log(board.cells)
-    expect(board.cells).toEqual(
+    expect(board.toNumArr()).toEqual(
       [
         [0, 0],
         [0, 0],
@@ -14,10 +14,10 @@ describe('Board', () => {
       ]
     )
   })
-  it('create cells', () => {
+  it('should convert cells to num 2', () => {
     let board = new Board(4, 2)
     // console.log(board.cells)
-    expect(board.cells).toEqual(
+    expect(board.toNumArr()).toEqual(
       [
         [0, 0, 0, 0],
         [0, 0, 0, 0]
