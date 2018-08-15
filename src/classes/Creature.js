@@ -1,4 +1,6 @@
 import AvailableMoves from './AvailableMoves'
+import MovePath from './MovePath'
+import Point from './Point'
 import {AVAILABLE_MOVE_NUM} from '../constants'
 
 const DEBUG = false
@@ -22,7 +24,11 @@ export default class Creature {
     if (availableMoveArr[toY][toX] !== AVAILABLE_MOVE_NUM) {
       return false
     }
-    // todo somewhere calc the path from A to B
+    let movePath = new MovePath( // todo do something with movePath
+      this.board.toNumArr(),
+      new Point(this.x, this.y),
+      new Point(toX, toY)
+    ).calculate()
     this.board.cell(this.x, this.y).removeCreature(this.uuid)
     this.x = toX
     this.y = toY
