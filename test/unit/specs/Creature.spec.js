@@ -10,14 +10,14 @@ describe('Creature', () => {
   })
 
   it('should move', () => {
-    let creature = new Creature(board, 0, 0)
+    let creature = new Creature(board, 0, 0, 4)
     expect(creature.move(1, 2)).toBe(true)
     expect(creature.x).toEqual(1)
     expect(creature.y).toEqual(2)
   })
 
   it('should not move', () => {
-    let creature = new Creature(board, 0, 0)
+    let creature = new Creature(board, 0, 0, 4)
     expect(creature.move(5, 5)).toBe(false)
     expect(creature.x).toEqual(0)
     expect(creature.y).toEqual(0)
