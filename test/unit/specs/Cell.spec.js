@@ -11,7 +11,13 @@ describe('Cell', () => {
     cell.addCreature({uuid: '123', isAlive: true})
     expect(cell.toNum()).toBe(Const.CREATURE_NUM)
 
+    cell.addCreature({uuid: '222', isAlive: true})
+    expect(cell.toNum()).toBe(Const.CREATURE_NUM)
+
     cell.removeCreature('123')
+    expect(cell.toNum()).toBe(Const.CREATURE_NUM)
+
+    cell.removeCreature('222')
     expect(cell.toNum()).toBe(Const.EMPTY_NUM)
 
     // add mock creature

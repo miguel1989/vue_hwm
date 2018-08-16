@@ -13,6 +13,15 @@ export default class Board {
     }
   }
 
+  addPlayer() {
+    // todo me
+  }
+
+  initCreature(creature, x, y) {
+    creature.attachToBoard(this, x, y)
+    this.cell(x, y).addCreature(creature)
+  }
+
   toNumArr() {
     let self = this
     let arr = new Array(this.height)

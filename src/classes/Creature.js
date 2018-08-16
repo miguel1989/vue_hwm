@@ -6,16 +6,12 @@ import {AVAILABLE_MOVE_NUM} from '../constants'
 const DEBUG = false
 
 export default class Creature {
-  constructor(board, x, y, speed = 4) {
+  constructor(speed = 4, initiative = 10.0) {
     this.uuid = Math.random().toString(16).slice(2)
-    this.board = board
-    this.x = x
-    this.y = y
+    this.name = ''
     this.speed = speed
-    // this.initiative = initiative 10.0
+    this.initiative = initiative
     this.isAlive = true
-
-    this.board.cell(this.x, this.y).addCreature(this)
     // todo isLarge, isFlying as skills
   }
 
@@ -47,5 +43,11 @@ export default class Creature {
     if (DEBUG) console.timeEnd('calculateAvailableMoves')
     if (DEBUG) console.log(resultCellNumArr)
     return resultCellNumArr
+  }
+
+  attachToBoard(board, x, y) {
+    this.board = board
+    this.x = x
+    this.y = y
   }
 }

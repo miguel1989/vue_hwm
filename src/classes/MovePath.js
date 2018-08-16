@@ -60,7 +60,7 @@ export default class MovePath {
       indicator++
     } while (arr[this.endPoint.y][this.endPoint.x] <= 0 && idx < totalSize)
 
-    console.log(arr)
+    // console.log(arr)
 
     if (arr[this.endPoint.y][this.endPoint.x] > 0) {
       let pathArr = []
