@@ -1,4 +1,4 @@
-import Creature from '@/classes/Creature'
+import Creature from '@/classes/creature/Creature'
 import Board from '@/classes/Board'
 // https://jestjs.io/docs/en/getting-started.html
 // https://jestjs.io/docs/en/expect
@@ -16,6 +16,7 @@ describe('Creature', () => {
     expect(creature.move(1, 2)).toBe(true)
     expect(creature.x).toEqual(1)
     expect(creature.y).toEqual(2)
+    expect(creature.movePathArr.length).toBeGreaterThan(0)
   })
 
   it('should not move', () => {

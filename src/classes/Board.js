@@ -37,4 +37,18 @@ export default class Board {
   cell(x, y) {
     return this.cells[y][x]
   }
+
+  start() {
+    // todo me
+    // place all units on the field
+    // atb.simulate(10 tours)
+    // do while (game is not ended)
+    //    atb.tick
+    //    if is time for creature to make a turn
+    //        creature.beforeTurn (negative morale) (poisoning)
+    //        creature do 'move', 'attack', 'def' , 'wait'
+    //        creature.afterTurn (positive morale)
+    //        atb.simulate(10 tours)
+    //    endif
+  }
 }

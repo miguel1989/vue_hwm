@@ -1,4 +1,4 @@
-import Creature from '@/classes/Creature'
+import Creature from '@/classes/creature/Creature'
 import Board from '@/classes/Board'
 // https://jestjs.io/docs/en/getting-started.html
 // https://jestjs.io/docs/en/expect

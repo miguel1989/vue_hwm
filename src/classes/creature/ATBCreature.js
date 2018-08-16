@@ -1,8 +1,8 @@
-export default class ATBCreature {
-  constructor(creature, startATB = -1) {
-    // this.uuid = Math.random().toString(16).slice(2)
-    this.creature = creature
-    this.initiative = creature.initiative
+import Creature from './Creature'
+
+export default class ATBCreature extends Creature {
+  constructor(speed, initiative, startATB = -1) { // default startATB is for testing purposes
+    super(speed, initiative)
     if (startATB === -1) {
       this.curATB = Math.floor(Math.random() * 11)
     } else {
@@ -10,11 +10,11 @@ export default class ATBCreature {
     }
   }
 
-  tick() {
+  atbTick() {
     this.curATB += this.initiative
   }
 
-  afterMove() {
+  atbAfterMove() {
     if (this.curATB >= 100) {
       this.curATB -= 100
     }
@@ -37,7 +37,7 @@ export default class ATBCreature {
   }
 
   toLogStr(withATB = false) {
-    let str = `${this.creature.name}(${this.creature.initiative})`
+    let str = super.toLogStr()
     if (withATB) {
       str += ` curATB=${this.curATB}`
     }

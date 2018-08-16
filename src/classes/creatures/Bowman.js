@@ -1,12 +1,11 @@
-import Creature from '../Creature'
+import ATBCreature from '../creature/ATBCreature'
 
-export default class Bowman extends Creature {
-  constructor(board, x, y) {
-    super(board,
-      x,
-      y,
+export default class Bowman extends ATBCreature {
+  constructor(startATB = -1) {
+    super(
       4, // speed
-      8) // initiative
+      8, // initiative
+      startATB)
     this.name = 'Bowman'
   }
 }
