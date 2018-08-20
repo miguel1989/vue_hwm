@@ -15,7 +15,7 @@ export default class ATBSimulation {
         let creaturesToMoveNow = this.creatures
           .filter(atbCreature => atbCreature.curATB >= 100 && atbCreature.isAlive)
           .sort((a, b) => {
-            console.log(`first = ${a.toLogStr(true)}, second = ${b.toLogStr(true)}`)
+            // console.log(`first = ${a.toLogStr(true)}, second = ${b.toLogStr(true)}`)
             // todo think about how solve problem when the atb is equal
             return b.curATB - a.curATB
           })

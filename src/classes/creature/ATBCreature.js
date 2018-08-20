@@ -12,6 +12,7 @@ export default class ATBCreature extends Creature {
 
   atbTick() {
     this.curATB += this.initiative
+    this.curATB = this._roundNumber(this.curATB, 2)
   }
 
   atbAfterMove() {
@@ -42,5 +43,18 @@ export default class ATBCreature extends Creature {
       str += ` curATB=${this.curATB}`
     }
     return str
+  }
+
+  _roundNumber(num, scale) {
+    if (!('' + num).includes('e')) {
+      return +(Math.round(num + 'e+' + scale) + 'e-' + scale)
+    } else {
+      let arr = ('' + num).split('e')
+      let sig = ''
+      if (+arr[1] + scale > 0) {
+        sig = '+'
+      }
+      return +(Math.round(+arr[0] + 'e' + sig + (+arr[1] + scale)) + 'e-' + scale)
+    }
   }
 }
