@@ -1,9 +1,11 @@
 import {OBSTACLE_NUM, CREATURE_NUM, EMPTY_NUM} from '../constants'
+import CellCoordinates from './CellCoordinates'
 
 export default class Cell {
   constructor() {
     this._creatures = []
     this._isObstacle = false
+    this.cellCoordinates = null
   }
 
   toNum() {
@@ -31,5 +33,9 @@ export default class Cell {
   // empty cell can only be converted to an obstacle
   makeAsObstacle() {
     this._isObstacle = true
+  }
+
+  addCellCoordinates(tlp, trp, blp, brp) {
+    this.cellCoordinates = new CellCoordinates(tlp, trp, blp, brp)
   }
 }

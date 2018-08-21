@@ -34,6 +34,7 @@
       this.resizeCanvas()
       this.ctx = this.$refs.canvas.getContext('2d')
       this.calcBoardPoints()
+      this.convertPointsToCellCoordinates()
       this.renderBoardLines()
       this.renderBoardPoints()
     },
@@ -71,11 +72,26 @@
         console.log(points)
         this.points = points
       },
+      convertPointsToCellCoordinates() {
+        for (let j = 0; j < this.points.length - 1; j++) {
+          for (let i = 0; i < this.points[0].length - 1; i++) {
+            let tlp = this.points[j][i]
+            let trp = this.points[j][i + 1]
+            let blp = this.points[j + 1][i]
+            let brp = this.points[j + 1][i + 1]
+            this.board.cell(i, j).addCellCoordinates(tlp, trp, blp, brp)
+          }
+        }
+      },
       renderBoardPoints() {
-        for (let j = 0; j < this.points.length; j++) {
-          for (let i = 0; i < this.points[0].length; i++) {
-            let point = this.points[j][i]
-            this.drawPoint(point.x, point.y)
+        for (let j = 0; j < this.board.height; j++) {
+          for (let i = 0; i < this.board.width; i++) {
+            let cellCoord = this.board.cell(i, j).cellCoordinates
+            this.drawPoint(cellCoord.topLeftPoint.x, cellCoord.topLeftPoint.y)
+            this.drawPoint(cellCoord.topRightPoint.x, cellCoord.topRightPoint.y)
+            this.drawPoint(cellCoord.bottomLeftPoint.x, cellCoord.bottomLeftPoint.y)
+            this.drawPoint(cellCoord.bottomRightPoint.x, cellCoord.bottomRightPoint.y)
+            this.drawPoint(cellCoord.centerPoint.x, cellCoord.centerPoint.y, 2, '#0f0')
           }
         }
       },
@@ -103,10 +119,9 @@
           this.ctx.closePath()
         }
       },
-      drawPoint(x, y, r = 2) {
+      drawPoint(x, y, r = 2, color = '#f00') {
         this.ctx.beginPath()
-        // this.ctx.strokeStyle = '#f00'
-        this.ctx.fillStyle = '#f00'
+        this.ctx.fillStyle = color
         this.ctx.arc(x, y, r, 0, 2 * Math.PI)
         // this.ctx.stroke()
         this.ctx.fill()
