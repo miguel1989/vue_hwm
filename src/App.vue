@@ -1,27 +1,39 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png"/>
+    <header>I am header</header>
+    <main>
+      <Board/>
+    </main>
+    <footer>I am footer</footer>
   </div>
 </template>
 
 <script>
-  // import HelloWorld from './components/HelloWorld'
+  import Board from './components/Board'
 
   export default {
     name: 'App',
     components: {
-      // HelloWorld
+      Board
     }
   }
 </script>
 
 <style>
+  html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
   #app {
+    height: 100%;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
   }
 </style>

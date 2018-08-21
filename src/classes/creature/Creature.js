@@ -51,6 +51,11 @@ export default class Creature {
     this.y = y
   }
 
+  canRunOnATB() {
+    // todo maybe add functionality from skills like frozen, stun, etc
+    return this.isAlive
+  }
+
   toLogStr() {
     return `${this.name}(${this.initiative})`
   }

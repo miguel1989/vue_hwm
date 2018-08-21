@@ -18,6 +18,7 @@ module.exports = {
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     // 'plugin:vue/essential',
+    'plugin:vue/recommended',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
     'standard'
   ],
@@ -27,6 +28,9 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    'vue/script-indent': ['warn', 2, {
+      'baseIndent': 1
+    }],
     'space-before-function-paren': ['off', 'always'],
     'no-var': 2,
     'eqeqeq': 2,
@@ -36,5 +40,13 @@ module.exports = {
     'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
+  },
+  'overrides': [
+    {
+      'files': ['*.vue'],
+      'rules': {
+        'indent': 'off'
+      }
+    }
+  ]
 }
